@@ -1,4 +1,4 @@
-import { createRouter,createWebHashHistory} from "vue-router"
+import { createRouter, createWebHashHistory } from "vue-router"
 
 const routes = [
   { path: "/", redirect: "/home" },
@@ -7,6 +7,11 @@ const routes = [
     name: "home",
     component: () => import("@/pages/home/index.vue")
   },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: () => import("@/pages/dashboard/index.vue")
+  }
 ]
 
 const router = createRouter({

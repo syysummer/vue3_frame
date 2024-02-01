@@ -42,7 +42,7 @@ module.exports = {
     "no-var": "error",
     "prettier/prettier": "error",
     // 禁止出现console
-    "no-console": "warn",
+    "no-console": "off",
     // 禁用debugger
     "no-debugger": "warn",
     // 禁止出现重复的 case 标签
@@ -122,7 +122,8 @@ module.exports = {
     // 禁止出现多行空行
     "no-multiple-empty-lines": "warn",
     // 禁止出现; - 禁止在代码中使用分号["error", "never"], E- SLint将不会对单行块的最后一个语句后的分号进行报错 ["error", "always", { "omitLastInOneLineBlock": true }]。
-    semi: ["error", "always", { omitLastInOneLineBlock: true }],
+    semi: "off",
+    "@typescript-eslint/semi": ["error", "never"],
     // 强制在块之前使用一致的空格
     "space-before-blocks": "warn",
     // 强制在 function的左括号之前使用一致的空格
@@ -139,7 +140,6 @@ module.exports = {
     "switch-colon-spacing": "warn",
     // 强制箭头函数的箭头前后使用一致的空格
     "arrow-spacing": "warn",
-    "no-var": "warn",
     "prefer-const": "warn",
     "prefer-rest-params": "warn",
     "no-useless-escape": "warn",
