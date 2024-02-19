@@ -41,9 +41,8 @@ pnpm add element-plus
 按需引入： pnpm add -D unplugin-vue-components unplugin-auto-import
 9. 引入可视化仓库 echarts
 pnpm add echarts
-
-
 10. 添加layout布局
 11. Nprogress页面跳转中加载中动画；
+
 12. Pinia状态持久化；
 ```

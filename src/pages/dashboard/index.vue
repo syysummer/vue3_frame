@@ -5,7 +5,7 @@ const router = useRouter()
 
 /*跳转到首页*/
 const jumpToHome = () => {
-  router.push("/home")
+  router.push("/home/index")
 }
 </script>
 
@@ -22,9 +22,9 @@ const jumpToHome = () => {
 .dashboard-page {
   margin: 0px auto;
   color: var(--color2);
-  width: 100%;
   padding: 30px;
   display: flex;
+  height: 100%;
   justify-content: space-around;
 }
 </style>

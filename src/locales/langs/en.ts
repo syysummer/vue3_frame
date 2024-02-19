@@ -1,5 +1,6 @@
 export default {
   home: {
-    title: "Home Page"
+    title: "Home Page",
+    logoTitle: "Data center"
   }
 }

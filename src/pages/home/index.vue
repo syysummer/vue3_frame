@@ -86,6 +86,7 @@ const jumpToDashboard = () => {
 
 <style lang="scss" scoped>
 .home-page {
+  height: 100%;
   .home-page-inner {
     width: 600px;
     height: 800px;
