@@ -44,7 +44,6 @@
   }
 }
 
-
 .el-dialog {
   display: flex;
   max-height: 80vh;
@@ -85,4 +84,3 @@
 .avatar-uploader .el-upload:hover {
   border-color: var(--el-color-primary);
 }
-

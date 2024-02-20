@@ -8,24 +8,24 @@ import { get, merge } from "lodash-es"
 import { getToken, getRefreshToken } from "./cache/cookies"
 
 /** 退出登录并强制刷新页面（会重定向到登录页） */
-function logout () {
+function logout() {
   useUserStoreHook().logout()
   router.push("/login")
 }
 
 /** 创建请求实例 */
-function createService () {
+function createService() {
   // 创建一个 axios 实例命名为 service
   const service = axios.create()
   // 请求拦截
   service.interceptors.request.use(
-    config => config,
+    (config) => config,
     // 发送失败
-    error => Promise.reject(error)
+    (error) => Promise.reject(error)
   )
   // 响应拦截（可根据具体业务作出相应的调整）
   service.interceptors.response.use(
-    response => {
+    (response) => {
       // apiData 是 api 返回的数据
       const apiData = response.data
       // 二进制数据则直接返回
@@ -60,7 +60,7 @@ function createService () {
           return Promise.reject(new Error(apiData.message || "Error"))
       }
     },
-    error => {
+    (error) => {
       // status 是 HTTP 状态码
       const status = get(error, "response.status")
       switch (status) {
@@ -113,8 +113,8 @@ function createService () {
 }
 
 /** 创建请求方法 */
-function createRequest (service: AxiosInstance) {
-  return function <T> (config: AxiosRequestConfig): Promise<T> {
+function createRequest(service: AxiosInstance) {
+  return function <T>(config: AxiosRequestConfig): Promise<T> {
     const token = getToken()
     const defaultConfig = {
       headers: {
