@@ -1,4 +1,5 @@
 import { createRouter, RouteRecordRaw, createWebHashHistory } from "vue-router"
+import { history, flatMultiLevelRoutes } from "./helper"
 
 // 在route.ts中使用i18n
 import i18n from "../locales/index"
@@ -53,7 +54,6 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: "概览",
           svgIcon: "dashboard",
-          roles: ["admin"],
           affix: true
         }
       }
@@ -70,6 +70,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
   {
     path: "/home",
     component: Layouts,
+    name: "Home Index",
     children: [
       {
         path: "index",
@@ -77,6 +78,7 @@ export const asyncRoutes: RouteRecordRaw[] = [
         name: "Home",
         meta: {
           title: i18n.global.t("home.title"),
+          roles: ["admin"],
           svgIcon: "dashboard"
         }
       }
@@ -92,11 +94,14 @@ export const asyncRoutes: RouteRecordRaw[] = [
   }
 ]
 
-// const thirdLevelRouteCache = true // 三层嵌套路由扁平化
+const thirdLevelRouteCache = true // 三层嵌套路由扁平化
 const router = createRouter({
-  history: createWebHashHistory(),
-  // routes: thirdLevelRouteCache ? flatMultiLevelRoutes(constantRoutes) : constantRoutes
-  routes: constantRoutes
+  // history: createWebHashHistory(),
+  history,
+  routes: thirdLevelRouteCache
+    ? flatMultiLevelRoutes(constantRoutes)
+    : constantRoutes
+  // routes: constantRoutes
 })
 
 /** 重置路由 */

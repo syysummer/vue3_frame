@@ -33,6 +33,10 @@ const classes = computed(() => {
 const isAdminAccount = computed(() => {
   return userStore.roles.indexOf("admin") !== -1
 })
+/*是否是运营账号*/
+const isOperateAccount = computed(() => {
+  return userStore.roles.indexOf("operator") !== -1
+})
 
 //#region 隐藏标签栏时删除其高度，是为了让 Logo 组件高度和 Header 区域高度始终一致
 const cssVariableName = "--v3-tagsview-height"
@@ -51,13 +55,13 @@ watchEffect(() => {
     <LeftMode
       v-if="
         (layoutMode === 'left' || appStore.device === DeviceEnum.Mobile) &&
-        isAdminAccount
+        !isOperateAccount
       "
     />
     <!-- 顶部模式 (管理员账号)-->
-    <TopMode v-else-if="layoutMode === 'top' && isAdminAccount" />
+    <TopMode v-else-if="layoutMode === 'top' && !isOperateAccount" />
     <!-- 混合模式 (管理员账号)-->
-    <LeftTopMode v-else-if="layoutMode === 'left-top' && isAdminAccount" />
+    <LeftTopMode v-else-if="layoutMode === 'left-top' && !isOperateAccount" />
 
     <!-- 运营任务面板模式 (运营账号)-->
     <OperateMode v-else-if="!isAdminAccount" />

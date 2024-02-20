@@ -43,6 +43,5 @@ pnpm add element-plus
 pnpm add echarts
 10. 添加layout布局
 11. Nprogress页面跳转中加载中动画；
-
-12. Pinia状态持久化；
+12. 添加接口重试相关配置；
 ```

@@ -1,4 +1,6 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios"
+// Retry interceptor function
+import axiosRetry from "axios-retry"
 import { useUserStoreHook } from "@/store/modules/user"
 import router from "@/router"
 import { ElMessage } from "element-plus"
@@ -6,24 +8,24 @@ import { get, merge } from "lodash-es"
 import { getToken, getRefreshToken } from "./cache/cookies"
 
 /** 退出登录并强制刷新页面（会重定向到登录页） */
-function logout() {
+function logout () {
   useUserStoreHook().logout()
   router.push("/login")
 }
 
 /** 创建请求实例 */
-function createService() {
+function createService () {
   // 创建一个 axios 实例命名为 service
   const service = axios.create()
   // 请求拦截
   service.interceptors.request.use(
-    (config) => config,
+    config => config,
     // 发送失败
-    (error) => Promise.reject(error)
+    error => Promise.reject(error)
   )
   // 响应拦截（可根据具体业务作出相应的调整）
   service.interceptors.response.use(
-    (response) => {
+    response => {
       // apiData 是 api 返回的数据
       const apiData = response.data
       // 二进制数据则直接返回
@@ -58,7 +60,7 @@ function createService() {
           return Promise.reject(new Error(apiData.message || "Error"))
       }
     },
-    (error) => {
+    error => {
       // status 是 HTTP 状态码
       const status = get(error, "response.status")
       switch (status) {
@@ -111,8 +113,8 @@ function createService() {
 }
 
 /** 创建请求方法 */
-function createRequest(service: AxiosInstance) {
-  return function <T>(config: AxiosRequestConfig): Promise<T> {
+function createRequest (service: AxiosInstance) {
+  return function <T> (config: AxiosRequestConfig): Promise<T> {
     const token = getToken()
     const defaultConfig = {
       headers: {
@@ -132,5 +134,23 @@ function createRequest(service: AxiosInstance) {
 
 /** 用于网络请求的实例 */
 const service = createService()
+
+/*接口重试相关配置*/
+axiosRetry(service, {
+  retries: 1, // Number of retries
+  retryDelay: (...arg) => axiosRetry.exponentialDelay(...arg, 2000), // 重试间隔
+  retryCondition: (error: any) => {
+    // Conditional check the error status code
+    const errorCodeList = [401, 429, 500]
+    if (
+      errorCodeList.indexOf(error.response.status) !== -1 &&
+      getRefreshToken()
+    ) {
+      return true
+    }
+    return false // Do not retry the others
+  }
+})
+
 /** 用于网络请求的方法 */
 export const request = createRequest(service)
