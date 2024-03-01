@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue"
 import { useRouter } from "vue-router"
-import { useUserStore } from "@/store/modules/user"
+// import { useUserStore } from "@/store/modules/user"
 import { type FormInstance, FormRules } from "element-plus"
 import { User, Lock } from "@element-plus/icons-vue"
 import { type LoginRequestData } from "@/api/login/types/login"
@@ -16,8 +16,8 @@ const loading = ref(false)
 
 /** 登录表单数据 */
 const loginFormData: LoginRequestData = reactive({
-  username: "",
-  password: ""
+  username: "admin",
+  password: "123456"
 })
 /** 登录表单校验规则 */
 const loginFormRules: FormRules = {
@@ -26,21 +26,22 @@ const loginFormRules: FormRules = {
 }
 /** 登录逻辑 */
 const handleLogin = () => {
-  loginFormRef.value?.validate((valid: boolean, fields) => {
-    if (valid) {
-      loading.value = true
-      useUserStore()
-        .login(loginFormData)
-        .then(() => {
-          router.push({ path: "/" })
-        })
-        .finally(() => {
-          loading.value = false
-        })
-    } else {
-      console.error("表单校验不通过", fields)
-    }
-  })
+  router.push({ path: "/home" })
+  // loginFormRef.value?.validate((valid: boolean, fields) => {
+  //   if (valid) {
+  //     loading.value = true
+  //     useUserStore()
+  //       .login(loginFormData)
+  //       .then(() => {
+  //         router.push({ path: "/" })
+  //       })
+  //       .finally(() => {
+  //         loading.value = false
+  //       })
+  //   } else {
+  //     console.error("表单校验不通过", fields)
+  //   }
+  // })
 }
 </script>
 

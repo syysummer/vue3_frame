@@ -7,7 +7,7 @@ import { useTitle } from "@/hooks/useTitle"
 import { getToken } from "@/utils/cache/cookies"
 import { fixBlankPage } from "@/utils/fix-blank-page"
 import routeSettings from "@/config/route"
-import isWhiteList from "@/config/white-list"
+// import isWhiteList from "@/config/white-list"
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 
@@ -83,16 +83,17 @@ router.beforeEach(async (to, _from, next) => {
     permissionStore.dynamicRoutes.forEach((route: any) => {
       router.addRoute(route)
     })
+    next()
 
     // 如果没有 Token
-    if (isWhiteList(to)) {
-      // 如果在免登录的白名单中，则直接进入
-      next()
-    } else {
-      // 其他没有访问权限的页面将被重定向到登录页面
-      next("/login")
-      NProgress.done()
-    }
+    // if (isWhiteList(to)) {
+    //   // 如果在免登录的白名单中，则直接进入
+    //   next()
+    // } else {
+    //   // 其他没有访问权限的页面将被重定向到登录页面
+    //   next("/login")
+    //   NProgress.done()
+    // }
   }
 })
 

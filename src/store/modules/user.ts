@@ -19,9 +19,9 @@ import { ElMessage } from "element-plus"
 
 export const useUserStore = defineStore("user", () => {
   const token = ref<string>(getToken() || "")
-  const roles = ref<string[]>([]) // 根据用户类型暂时 1 超级管理员 2 运营账号 3 终端账号
-  const username = ref<string>("")
-  const roleList = ref<any>([]) // 运营账号单独区分角色
+  const roles = ref<string[]>(["1"]) // 根据用户类型暂时 1 超级管理员 2 运营账号 3 终端账号
+  const username = ref<string>("admin")
+  const roleList = ref<any>(["admin"]) // 运营账号单独区分角色
   const operateType = ref<string[]>([]) // 当前账号运营的类型(图片，文本标签，语音)
 
   const permissionStore = usePermissionStore()

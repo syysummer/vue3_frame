@@ -1,4 +1,4 @@
-import { createRouter, RouteRecordRaw, createWebHashHistory } from "vue-router"
+import { createRouter, RouteRecordRaw } from "vue-router"
 import { history, flatMultiLevelRoutes } from "./helper"
 
 // 在route.ts中使用i18n
@@ -52,21 +52,30 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/pages/dashboard/index.vue"),
         name: "Dashboard",
         meta: {
-          title: "概览",
+          title: "项目管理",
           svgIcon: "dashboard",
           affix: true
         }
       }
     ]
-  }
-]
-
-/**
- * 动态路由
- * 用来放置有权限 (Roles 属性) 的路由
- * 必须带有 Name 属性
- */
-export const asyncRoutes: RouteRecordRaw[] = [
+  },
+  {
+    path: "/dashboard",
+    component: Layouts,
+    name: "Dashboard",
+    children: [
+      {
+        path: "",
+        component: () => import("@/pages/dashboard/index.vue"),
+        name: "Dashboard",
+        meta: {
+          title: "项目管理",
+          svgIcon: "dashboard",
+          affix: true
+        }
+      }
+    ]
+  },
   {
     path: "/home",
     component: Layouts,
@@ -83,7 +92,15 @@ export const asyncRoutes: RouteRecordRaw[] = [
         }
       }
     ]
-  },
+  }
+]
+
+/**
+ * 动态路由
+ * 用来放置有权限 (Roles 属性) 的路由
+ * 必须带有 Name 属性
+ */
+export const asyncRoutes: RouteRecordRaw[] = [
   {
     path: "/:pathMatch(.*)*", // Must put the 'ErrorPage' route at the end, 必须将 'ErrorPage' 路由放在最后
     redirect: "/404",
