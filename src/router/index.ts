@@ -52,7 +52,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/pages/dashboard/index.vue"),
         name: "Dashboard",
         meta: {
-          title: "项目管理",
+          title: "概览",
           svgIcon: "dashboard",
           affix: true
         }
@@ -69,7 +69,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/pages/dashboard/index.vue"),
         name: "Dashboard",
         meta: {
-          title: "项目管理",
+          title: "概览",
           svgIcon: "dashboard",
           affix: true
         }
