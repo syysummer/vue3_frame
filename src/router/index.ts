@@ -77,16 +77,33 @@ export const constantRoutes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: "/home",
+    path: "/virtual",
     component: Layouts,
-    name: "Home Index",
+    name: "Virtual List",
+    children: [
+      {
+        path: "list",
+        component: () => import("@/pages/virtual-list/index.vue"),
+        name: "Virtual List index",
+        meta: {
+          title: "虚拟列表",
+          roles: ["admin"],
+          svgIcon: "dashboard"
+        }
+      }
+    ]
+  },
+  {
+    path: "/editor",
+    component: Layouts,
+    name: "Editor",
     children: [
       {
         path: "index",
-        component: () => import("@/pages/home/index.vue"),
-        name: "Home",
+        component: () => import("@/pages/editor/index.vue"),
+        name: "Editor Index",
         meta: {
-          title: i18n.global.t("home.title"),
+          title: "富文本编辑器",
           roles: ["admin"],
           svgIcon: "dashboard"
         }

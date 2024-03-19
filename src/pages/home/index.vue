@@ -35,7 +35,7 @@ const changeLocaleLang = (lang: string) => {
     locale.value = lang
     return
   }
-  import(`../../locales/langs/${lang}.ts`).then((message) => {
+  import(`../../locales/langs/${lang}.ts`).then((message: any) => {
     locale.value = lang
     setLocaleMessage(lang, message.default)
   })
@@ -64,11 +64,7 @@ const jumpToDashboard = () => {
             class="m-2"
             placeholder="Select"
             size="large"
-            style="
-               {
-                width: 240px;
-              }
-            "
+            :style="{ width: '240px' }"
             @change="handleBtnClick"
           >
             <el-option
