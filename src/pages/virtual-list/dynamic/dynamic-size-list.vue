@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue"
 
+// 核心，需要监控item的尺寸变化
+// this.resizeObserver = new ResizeObserver(() => {
+//   onSizeChange(index, domNode)
+// })
+
 const props = defineProps({
   height: {
     type: Number,
@@ -147,7 +152,7 @@ const scrollHandle = (event: any) => {
 
 <template>
   <div
-    class="variable-list-wrap"
+    class="dynamic-list-wrap"
     :style="{
       position: 'relative',
       width: props.width + 'px',
@@ -158,7 +163,7 @@ const scrollHandle = (event: any) => {
     @scroll="(e: any) => scrollHandle(e)"
   >
     <div
-      class="variable-list"
+      class="dynamic-list"
       :style="{
         height: estimatedHeight(props.itemEstimatedSize, props.itemCount),
         width: '100%'

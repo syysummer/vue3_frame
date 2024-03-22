@@ -100,7 +100,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: "index",
-        component: () => import("@/pages/editor/index.vue"),
+        component: () => import("@/pages/Editor/index.vue"),
         name: "Editor Index",
         meta: {
           title: "富文本编辑器",

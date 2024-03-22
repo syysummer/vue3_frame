@@ -2,7 +2,8 @@
 import { ref } from "vue"
 import type { TabsPaneContext } from "element-plus"
 import FixedVirtualList from "./fixed/index.vue"
-import VariableSizeList from "./variable/variable-size-list.vue"
+import VariableSizeList from "./variable/index.vue"
+import DynamicSizeList from "./dynamic/index.vue"
 
 const activeName = ref("first")
 
@@ -15,11 +16,13 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   <div class="virtual-list">
     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="固定尺寸" name="first">
-        <FixedVirtualList />
+        <FixedVirtualList v-if="activeName === 'first'" />
       </el-tab-pane>
-      <el-tab-pane label="动态尺寸" name="second">动态尺寸虚拟列表</el-tab-pane>
+      <el-tab-pane label="动态尺寸" name="second">
+        <DynamicSizeList v-if="activeName === 'second'" />
+      </el-tab-pane>
       <el-tab-pane label="可变尺寸" name="third">
-        <VariableSizeList />
+        <VariableSizeList v-if="activeName === 'third'" />
       </el-tab-pane>
     </el-tabs>
   </div>

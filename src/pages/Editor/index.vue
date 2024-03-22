@@ -82,12 +82,9 @@ const customPaste = (editor: any, event: any, callback: any) => {
   const html = event.clipboardData.getData("text/html") // 获取粘贴的 html
   const text = event.clipboardData.getData("text/plain") // 获取粘贴的纯文本
   const rtf = event.clipboardData.getData("text/rtf") // 获取 rtf 数据（如从 word wsp 复制粘贴）
-  console.log(html, "html")
-  console.log(text, "text")
   console.log(rtf, "rtf")
   const regex = /<!--StartFragment-->(.*?)<!--EndFragment-->/
   const matches = html.match(regex)
-  console.log(matches, "matches")
   if (matches[1]) {
     const currentHtml = editor.getHtml()
     const targetHtml = currentHtml.slice(0, -4) + matches[1] + "</p>"
